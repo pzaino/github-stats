@@ -52,6 +52,7 @@ class Queries(object):
             if result is not None:
                 if "errors" in result:
                     print(f"GraphQL query errors: {result['errors']}")
+                    return dict()
                 return result
         except:
             print("aiohttp failed for GraphQL query")
@@ -66,6 +67,7 @@ class Queries(object):
                 if result is not None:
                     if "errors" in result:
                         print(f"GraphQL query errors: {result['errors']}")
+                        return dict()
                     return result
         return dict()
 
