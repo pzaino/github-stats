@@ -50,6 +50,9 @@ class Queries(object):
                 )
             result = await r_async.json()
             if result is not None:
+                if "errors" in result:
+                    print(f"GraphQL query errors: {result['errors']}")
+                    return dict()
                 return result
         except:
             print("aiohttp failed for GraphQL query")
@@ -62,6 +65,9 @@ class Queries(object):
                 )
                 result = r_requests.json()
                 if result is not None:
+                    if "errors" in result:
+                        print(f"GraphQL query errors: {result['errors']}")
+                        return dict()
                     return result
         return dict()
 
@@ -166,8 +172,8 @@ class Queries(object):
         }},
         contributionTypes: [
             COMMIT,
+            ISSUE,
             PULL_REQUEST,
-            REPOSITORY,
             PULL_REQUEST_REVIEW
         ]
         after: {"null" if contrib_cursor is None else '"'+ contrib_cursor +'"'}
